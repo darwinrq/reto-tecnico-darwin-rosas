@@ -1,0 +1,133 @@
+openapi: 3.0.1
+info:
+  title: API Documentation Reto Tecnico .
+  description: API Documentation by Darwin Rosas with swagger.io.
+  version: 1.0.0
+
+paths:
+
+  /people:
+    get:
+      tags:
+      - API SWAPI
+      summary: Obtiene la informacion de "peoples" de "SWAPI" .
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation json SWAPI"
+        400:
+          description: 'responses/BadRequest'
+        404:
+          description: 'responses/NotFound'
+        500:
+          description: 'responses/ServerError'
+  
+  /people/{peopleId}:
+    get:
+      tags:
+      - API SWAPI
+      summary: Obtiene la informacion de "people" de "SWAPI" .
+      produces:
+      - "application/json"
+      parameters: 
+      - name: "peopleId"
+        in: "path"
+        description: "ID of people"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation json SWAPI"
+        400:
+          description: 'responses/BadRequest'
+        404:
+          description: 'responses/NotFound'
+        500:
+          description: 'responses/ServerError'
+          
+  /film:
+    get:
+      tags:
+      - API SWAPI
+      summary: Obtiene la informacion de "films" de "SWAPI" .
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation json SWAPI"
+        400:
+          description: 'responses/BadRequest'
+        404:
+          description: 'responses/NotFound'
+        500:
+          description: 'responses/ServerError'
+  
+  /film/{filmId}:
+    get:
+      tags:
+      - API SWAPI
+      summary: Obtiene la informacion de "film" de "SWAPI" .
+      produces:
+      - "application/json"
+      parameters: 
+      - name: "peopleId"
+        in: "path"
+        description: "ID of people"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation json SWAPI"
+        400:
+          description: 'responses/BadRequest'
+        404:
+          description: 'responses/NotFound'
+        500:
+          description: 'responses/ServerError'
+  
+
+  /dynamo-people:
+    get:
+      tags:
+      - API Dynamodb
+      summary: Obtiene la informacion de la base de datos Dynamodb.
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation json Dynamodb"
+        400:
+          description: 'responses/BadRequest'
+        404:
+          description: 'responses/NotFound'
+        500:
+          description: 'responses/ServerError'
+  
+  /dynamo-people/{peopleId}:
+    post:
+      tags:
+      - API Dynamodb
+      summary: Obtiene la informacion de "people" de "SWAPI" y la registra en la base de datos Dynamodb" .
+      produces:
+      - "application/json"
+      parameters: 
+      - name: "peopleId"
+        in: "path"
+        description: "ID of people"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation json Dynamodb"
+        400:
+          description: 'responses/BadRequest'
+        404:
+          description: 'responses/NotFound'
+        500:
+          description: 'responses/ServerError'  
+  
+

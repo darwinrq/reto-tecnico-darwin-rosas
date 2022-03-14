@@ -1,0 +1,81 @@
+
+service: reto-tecnico-darwin-rosas
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: '*'
+
+functions:
+  hello:
+    handler: src/handler.hello
+
+  getPeople:
+    handler: src/people/handler.peopleList
+    events:
+      - http:
+          method: GET
+          path: /people
+          cors: true
+
+      - http:
+          method: GET
+          path: /people/{peopleId}
+          cors: true
+          request:
+            parameters:
+              paths:
+                peopleId: false
+
+  getFilm:
+    handler: src/film/handler.filmList
+    events:
+      - http:
+          method: GET
+          path: /film
+          cors: true
+
+      - http:
+          method: GET
+          path: /film/{filmId}
+          cors: true
+          request:
+            parameters:
+              paths:
+                filmId: false
+
+  createPeople:
+    handler: src/dynamoPeople/handler.addPeople
+    events:
+      - http:
+          method: POST
+          path: /dynamo-people/{peopleId}
+  
+  listPeople:
+    handler: src/dynamoPeople/handler.listPeople
+    events:
+      - http:
+          method: GET
+          path: /dynamo-people
+
+resources:
+  Resources:
+    TaskTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: peoples
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
